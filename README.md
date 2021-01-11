@@ -21,3 +21,35 @@ class Solution {
     }
 }
 ```
+
+**Find Numbers with Even Number of Digits**
+
+```java
+class Solution {
+    public int findNumbers(int[] nums) {
+        
+        int numberOfEvenDigitsNumbers = 0;
+        
+        for (int i = 0; i < nums.length; i++) {
+            
+            int numberOfDigits = 0;
+            int dividend = nums[i];
+            
+            while (true) {
+                dividend = dividend / 10;
+                numberOfDigits++;
+                System.out.println(dividend);
+                if (dividend == 0) {
+                    if (numberOfDigits % 2 == 0) {
+                        numberOfEvenDigitsNumbers++;
+                    }
+                    break;
+                }
+            }
+            
+        }
+        
+        return numberOfEvenDigitsNumbers;
+    }
+}
+```
