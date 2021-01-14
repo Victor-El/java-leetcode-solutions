@@ -178,3 +178,70 @@ class Solution {
     }
 }
 ```
+
+### Remove Element
+
+Given an array nums and a value val, remove all instances of that value in-place and return the new length.
+
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+
+The order of elements can be changed. It doesn't matter what you leave beyond the new length.
+
+**Example:**
+
+> Input: nums = [3,2,2,3], val = 3 <br>
+> Output: 2, nums = [2,2] <br>
+> Explanation: Your function should return length = 2, with the first two elements of nums being 2. <br>
+> It doesn't matter what you leave beyond the returned length. For example if you return 2 with nums = [2,2,3,3] or nums = [2,2,0,0], your answer will be accepted.
+
+```java
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        
+        int length = nums.length;
+        
+        for (int i = 0; i < length; i++) {
+            if (nums[i] == val) {
+                if (nums[length - 1] == val) {
+                    length--;
+                    i = i - 1;
+                    continue;
+                }
+                int temp = nums[i];
+                nums[i] = nums[length - 1];
+                nums[length - 1] = temp;
+                length--;
+            }
+        }
+        
+        return length;
+    }
+}
+```
+### OR
+
+```java
+// Ordered solution
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        
+        int length = nums.length;
+        for (int j = 0; j < nums.length; j++) {
+            for (int i = 0; i < length; i++) {
+                if (nums[i] == val) {
+                    remove(nums, i, length);
+                    length--;
+                }
+            }
+        }
+        
+        return length;
+    }
+    
+    void remove(int[] nums, int pos, int length) {
+        for (int i = pos + 1; i < length; i++) {
+            nums[i - 1] = nums[i];
+        }
+    }
+}
+```
