@@ -318,3 +318,59 @@ class Solution {
     }
 }
 ```
+
+### Valid Mountain Array
+
+Recall that arr is a mountain array if and only if:
+
+- arr.length >= 3
+- There exists some i with 0 < i < arr.length - 1 such that:
+    - arr[0] < arr[1] < ... < arr[i - 1] < arr[i]
+    - arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
+
+
+**Examples:**
+
+> Input: arr = [2,1] <br>
+> Output: false
+
+> Input: arr = [3,5,5] <br>
+> Output: false
+
+> Input: arr = [0,3,2,1] <br>
+> Output: true
+
+```java
+class Solution {
+    public boolean validMountainArray(int[] arr) {
+        int peak = 0;
+        boolean result = true;
+        
+        if (arr.length < 3) {
+            return false;
+        }
+        
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > arr[i - 1]) {
+                peak = i;
+            } else {
+                break;
+            }
+        }
+        
+        if (peak >= arr.length - 1 || peak == 0) {
+            return false;
+        }
+        
+        for (int i = peak + 1; i < arr.length; i++) {
+            
+            if (!(arr[i] < arr[i - 1])) {
+                result = false;
+                break;
+            }
+        }
+        
+        return result;
+    }
+}
+```
